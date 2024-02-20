@@ -21,7 +21,7 @@ jobs:
         uses: dawidd6/action-delete-branch@v3
         with:
           github_token: ${{github.token}}
-          branches: develop
+          branch: develop
 
   create-branch:
     needs: delete-branch
