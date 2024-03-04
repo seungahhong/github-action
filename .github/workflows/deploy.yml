@@ -23,7 +23,7 @@ jobs:
         run: |
           branch_name="stage"
           export BRANCHES=$(git branch -r)
-          echo $BRANCHES | grep stage
+          echo $BRANCHES | grep main
 
           if git rev-parse --verify "$branch_name" > /dev/null 2>&1; then
             echo "Branch $branch_name exists. Deleting..."
