@@ -27,6 +27,7 @@ jobs:
             git push origin --delete "$branch_name"
           else
             echo "Branch $branch_name does not exist."
+            echo "$github.ref"
           fi
 
   create-branch:
