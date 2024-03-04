@@ -21,11 +21,11 @@ jobs:
         # 해당 브랜치가 생성되어 있는지를 확인 후 삭제한다.
         run: |
           branch_name="stage"
-          if git rev-parse --verify stage > /dev/null 2>&1; then
-            echo "stage branch exists."
+          if git rev-parse --verify "$branch_name" > /dev/null 2>&1; then
+            echo "Branch $branch_name exists. Deleting..."
             git push origin --delete "$branch_name"
           else
-            echo "stage branch does not exist."
+            echo "Branch $branch_name does not exist."
           fi
 
   create-branch:
