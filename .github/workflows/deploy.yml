@@ -20,7 +20,7 @@ jobs:
       - name: Check if branch exists
         # 해당 브랜치가 생성되어 있는지를 확인한다.
         run: |
-          if [ -z "$(git rev-parse --verify stage)" ]; then
+          if [ -z "$(git rev-parse --verify refs/heads/stage)" ]; then
             echo "Branch does not exist"
             exit 1
           else
