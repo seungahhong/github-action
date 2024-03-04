@@ -24,14 +24,13 @@ jobs:
           branch_name="stage"
           export BRANCHES=$(git branch -al)
           echo $BRANCHES
-          echo $BRANCHES | grep main
+          echo $BRANCHES | grep stage
 
           if git rev-parse --verify "$branch_name" > /dev/null 2>&1; then
             echo "Branch $branch_name exists. Deleting..."
             git push origin --delete "$branch_name"
           else
             echo "Branch $branch_name does not exist."
-            echo "myValue=${{ github.ref }}"
           fi
 
   create-branch:
