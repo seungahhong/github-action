@@ -22,7 +22,7 @@ jobs:
         # 해당 브랜치가 생성되어 있는지를 확인 후 삭제한다.
         run: |
           branch_name="stage"
-          export BRANCHES=$(git branch -r)
+          export BRANCHES=$(git branch -al)
           echo $BRANCHES
           echo $BRANCHES | grep main
 
