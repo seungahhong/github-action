@@ -24,6 +24,7 @@ jobs:
             echo "stage branch exists."
           else
             echo "stage branch does not exist."
+            exit 1
           fi
 
       # 해당 브랜치를 삭제한다.
