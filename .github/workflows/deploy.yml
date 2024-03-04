@@ -16,11 +16,13 @@ jobs:
       # 해당 저장소의 코드를 가져옵니다.
       - name: Git checkout
         uses: actions/checkout@v3
-
+        with:
+          ref: refs/heads/stage
+          fetch-depth: 0
       - name: Check if branch exists
         # 해당 브랜치가 생성되어 있는지를 확인한다.
         run: |
-          if [ -z "$(git rev-parse --verify refs/heads/stage)" ]; then
+          if [ -z "$(git rev-parse --verify stage)" ]; then
             echo "Branch does not exist"
             exit 1
           else
