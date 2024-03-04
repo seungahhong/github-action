@@ -10,26 +10,17 @@ on:
 jobs:
   delete-branch:
     runs-on: ubuntu-latest
-    # if:
-    #   # 해당 브랜치가 생성되어 있는지를 확인한다.
-    #   contains(github.ref, 'stage')
     steps:
       # 해당 저장소의 코드를 가져옵니다.
       - name: Git checkout
         uses: actions/checkout@v3
 
-      - name: Check if branch exists
-        # 해당 브랜치가 생성되어 있는지를 확인 후 삭제한다.
-        run: |
-          branch_name="stage"
-          git checkout "$branch_name"
-
-          if git rev-parse --verify "$branch_name" > /dev/null 2>&1; then
-            echo "Branch $branch_name exists. Deleting..."
-            git push origin --delete "$branch_name"
-          else
-            echo "Branch $branch_name does not exist."
-          fi
+      # 해당 브랜치를 삭제한다.
+      - name: Delete branch
+        uses: dawidd6/action-delete-branch@v3
+        with:
+          github_token: ${{github.token}}
+          branches: stage
 
   create-branch:
     needs: delete-branch
@@ -39,7 +30,7 @@ jobs:
       - name: Git checkout
         uses: actions/checkout@v3
         with:
-          ref: master
+          path: master
 
       - name: create branch
         uses: peterjgrainger/action-create-branch@v2.2.0
