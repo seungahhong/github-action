@@ -18,21 +18,15 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Check if branch exists
-        # 해당 브랜치가 생성되어 있는지를 확인한다.
+        # 해당 브랜치가 생성되어 있는지를 확인 후 삭제한다.
         run: |
+          branch_name="stage"
           if git rev-parse --verify stage > /dev/null 2>&1; then
             echo "stage branch exists."
+            git push origin --delete "$branch_name"
           else
             echo "stage branch does not exist."
-            exit 1
           fi
-
-      # 해당 브랜치를 삭제한다.
-      - name: Delete branch
-        uses: dawidd6/action-delete-branch@v3
-        with:
-          github_token: ${{github.token}}
-          branches: stage
 
   create-branch:
     needs: delete-branch
