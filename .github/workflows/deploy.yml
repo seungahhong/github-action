@@ -4,8 +4,7 @@ on:
   schedule:
     - cron: '0 21 * * *'
   push:
-    branches:
-      - '*'
+    branches: [main]
 
 jobs:
   delete-branch:
