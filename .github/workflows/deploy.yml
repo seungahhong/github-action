@@ -22,14 +22,9 @@ jobs:
         # 해당 브랜치가 생성되어 있는지를 확인 후 삭제한다.
         run: |
           branch_name="stage"
-          git ls-remote --exit-code --heads origin "$branch_name" >/dev/null 2>&1
-          EXIT_CODE=$?
-
-          if [[ $EXIT_CODE == '0' ]]; then
-            echo "Git branch '$BRANCH' exists in the remote repository"
-          elif [[ $EXIT_CODE == '2' ]]; then
-            echo "Git branch '$BRANCH' does not exist in the remote repository"
-          fi
+          export BRANCHES=$(git branch -r)
+          echo $BRANCHES
+          echo $BRANCHES | grep main
 
           if git rev-parse --verify "$branch_name" > /dev/null 2>&1; then
             echo "Branch $branch_name exists. Deleting..."
