@@ -10,7 +10,7 @@ jobs:
   delete-branch:
     runs-on: ubuntu-latest
     # 해당 브랜치가 생성되어 있는지를 확인한다.
-    if: github.ref == 'refs/heads/stage'
+    # if: github.ref == 'refs/heads/stage'
     steps:
       # 해당 저장소의 코드를 가져옵니다.
       - name: Git checkout
