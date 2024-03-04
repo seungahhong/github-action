@@ -28,8 +28,9 @@ jobs:
     steps:
       - name: Git checkout
         uses: actions/checkout@v3
+        with:
+          ref: master
 
-      - run: ls -al
       - name: create branch
         uses: peterjgrainger/action-create-branch@v2.2.0
         env:
