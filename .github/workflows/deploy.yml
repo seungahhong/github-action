@@ -32,7 +32,6 @@ jobs:
           title: My pull request
           body: '**Automated pull request**'
           label: enhancement
-          milestone: My milestone
           draft: true
           old_string: '<!-- Add your description here -->'
           new_string: '** Automatic pull request**'
