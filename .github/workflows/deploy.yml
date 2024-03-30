@@ -38,7 +38,7 @@ jobs:
   #         branch: stage
 
   merge-branch:
-    needs: create-branch
+    # needs: create-branch
     runs-on: ubuntu-latest
 
     steps:
