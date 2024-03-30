@@ -8,58 +8,31 @@ on:
     - cron: '0 3 * * *'
 
 jobs:
-  # delete-branch:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     # 해당 저장소의 코드를 가져옵니다.
-  #     - name: Git checkout
-  #       uses: actions/checkout@v3
+  delete-branch:
+    runs-on: ubuntu-latest
+    steps:
+      # 해당 저장소의 코드를 가져옵니다.
+      - name: Git checkout
+        uses: actions/checkout@v3
 
-  #     # 해당 브랜치를 삭제한다.
-  #     - name: Delete branch
-  #       uses: dawidd6/action-delete-branch@v3
-  #       with:
-  #         github_token: ${{github.token}}
-  #         branches: stage
+      # 해당 브랜치를 삭제한다.
+      - name: Delete branch
+        uses: dawidd6/action-delete-branch@v3
+        with:
+          github_token: ${{github.token}}
+          branches: stage
 
-  # create-branch:
-  #   needs: delete-branch
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #     - name: Git checkout
-  #       uses: actions/checkout@v3
-
-  #     - name: create branch
-  #       uses: peterjgrainger/action-create-branch@v2.2.0
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #       with:
-  #         branch: stage
-
-  merge-branch:
-    # needs: create-branch
+  create-branch:
+    needs: delete-branch
     runs-on: ubuntu-latest
 
     steps:
       - name: Git checkout
         uses: actions/checkout@v3
 
-      - name: Get Current Release Branch
-        id: release
-        run: echo "::set-output name=branch::$(date +'release/v%Y%m%d')"
-
-      - name: Echo Release Branch
-        run: echo ${{ steps.release.outputs.branch }}
-
-      - name: Create PR to stage
-        uses: quangvo09/pull-request-action@v1
+      - name: create branch
+        uses: peterjgrainger/action-create-branch@v2.2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          branch_prefix: ${{ steps.release.outputs.branch }}
-          base_branch: stage
-
-      - name: Create PR to stage
-        uses: quangvo09/pull-request-action@v1
-        with:
-          branch_prefix: ${{ steps.release.outputs.branch }}
-          base_branch: main
+          branch: stage
