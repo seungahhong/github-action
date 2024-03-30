@@ -34,7 +34,7 @@ jobs:
           label: frontend
           new_string: '** Automatic pull request**'
           get_diff: true
-          allow_no_diff: false
+          allow_no_diff: true
 
   main-pr-branch:
     needs: stage-pr-branch
@@ -62,4 +62,4 @@ jobs:
           label: frontend
           new_string: '** Automatic pull request**'
           get_diff: true
-          allow_no_diff: false
+          allow_no_diff: true
