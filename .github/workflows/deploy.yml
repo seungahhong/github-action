@@ -29,8 +29,8 @@ jobs:
         uses: devops-infra/action-pull-request@v0.5.5
         with:
           github_token: ${{ secrets.ACCESS_TOKEN }}
-          source_branch: ${{ steps.release.outputs.branch }}
-          target_branch: stage
+          source_branch: stage
+          target_branch: ${{ steps.release.outputs.branch }}
           title: My pull request
           body: '**Automated pull request**'
           label: enhancement
