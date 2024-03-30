@@ -55,7 +55,7 @@ jobs:
         run: echo ${{ steps.release.outputs.branch }}
 
       - name: Create PR to stage
-        uses: quangvo09/pull-request-action@v1
+        uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
           commit-message: Update report
