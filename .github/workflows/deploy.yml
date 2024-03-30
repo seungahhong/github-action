@@ -8,7 +8,7 @@ on:
     - cron: '0 3 * * *'
 
 jobs:
-  merge-branch:
+  stage-pr-branch:
     # needs: create-branch
     runs-on: ubuntu-latest
 
@@ -35,6 +35,21 @@ jobs:
           new_string: '** Automatic pull request**'
           get_diff: true
           allow_no_diff: false
+
+  main-pr-branch:
+    needs: stage-pr-branch
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get Current Release Branch
+        id: release
+        run: echo "::set-output name=branch::$(date +'release/v%Y%m%d')"
+
+      - name: Echo Release Branch
+        run: echo ${{ steps.release.outputs.branch }}
+
+      - name: Git checkout
+        uses: actions/checkout@v3
 
       - name: Create PR to main
         uses: devops-infra/action-pull-request@v0.5.5
