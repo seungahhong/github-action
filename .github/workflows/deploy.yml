@@ -23,7 +23,7 @@ jobs:
       - name: Echo Release Branch
         run: echo ${{ steps.release.outputs.branch }}
 
-      - name: Create PR to stage1
+      - name: Create PR to stage
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
