@@ -29,11 +29,22 @@ jobs:
           github_token: ${{ secrets.ACCESS_TOKEN }}
           source_branch: ${{ steps.release.outputs.branch }}
           target_branch: stage
-          title: My pull request
+          title: ${{ steps.release.outputs.branch }} pull request
           body: '**Automated pull request**'
-          label: enhancement
-          draft: true
-          old_string: '<!-- Add your description here -->'
+          label: frontend
+          new_string: '** Automatic pull request**'
+          get_diff: true
+          allow_no_diff: false
+
+      - name: Create PR to stage
+        uses: devops-infra/action-pull-request@v0.5.5
+        with:
+          github_token: ${{ secrets.ACCESS_TOKEN }}
+          source_branch: ${{ steps.release.outputs.branch }}
+          target_branch: main
+          title: ${{ steps.release.outputs.branch }} pull request
+          body: '**Automated pull request**'
+          label: frontend
           new_string: '** Automatic pull request**'
           get_diff: true
           allow_no_diff: false
