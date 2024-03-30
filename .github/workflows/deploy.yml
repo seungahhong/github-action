@@ -33,7 +33,7 @@ jobs:
           body: '**Automated pull request**'
           label: frontend
           new_string: '** Automatic pull request**'
-          get_diff: false
+          get_diff: true
           allow_no_diff: true
 
   main-pr-branch:
@@ -61,5 +61,5 @@ jobs:
           body: '**Automated pull request**'
           label: frontend
           new_string: '** Automatic pull request**'
-          get_diff: false
+          get_diff: true
           allow_no_diff: true
