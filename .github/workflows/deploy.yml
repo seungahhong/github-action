@@ -3,7 +3,7 @@ name: Delete Branch & Create Branch
 on:
   push:
     branches:
-      - '!main' # excludes master
+      - '*'
   schedule:
     - cron: '0 3 * * *'
 
