@@ -45,9 +45,21 @@ jobs:
       - name: Git checkout
         uses: actions/checkout@v3
 
-      - name: Get Current Date
-        id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Get Current Release Branch
+        id: release
+        run: echo "::set-output name=branch::$(date +'release/v%Y%m%d')"
 
       - name: Echo Date
-        run: echo ${{ steps.date.outputs.date }}
+        run: echo ${{ steps.release.outputs.branch }}
+
+      # - name: Create PR to stage
+      #   uses: quangvo09/pull-request-action@v1
+      #   with:
+      #     branch_prefix: ${{ steps.release.outputs.date }}
+      #     base_branch: stage
+
+      # - name: Create PR to stage
+      #   uses: quangvo09/pull-request-action@v1
+      #   with:
+      #     branch_prefix: ${{ steps.release.outputs.date }}
+      #     base_branch: main
