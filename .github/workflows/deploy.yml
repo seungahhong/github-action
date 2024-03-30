@@ -55,7 +55,7 @@ jobs:
       - name: Create PR to stage
         uses: quangvo09/pull-request-action@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.ACCESS_TOKEN }}
           branch_prefix: ${{ steps.release.outputs.branch }}
           base_branch: stage
 
