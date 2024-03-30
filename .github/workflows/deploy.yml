@@ -14,9 +14,7 @@ jobs:
 
     steps:
       - name: Git checkout
-      - uses: actions/checkout@v3
-        with:
-          ref: stage
+        uses: actions/checkout@v3
 
       - name: Get Current Release Branch
         id: release
