@@ -26,9 +26,17 @@ jobs:
           ref: ${{ steps.release.outputs.branch }}
 
       - name: Create PR to stage
-        uses: thomaseizinger/create-pull-request@master
+        uses: devops-infra/action-pull-request@v0.5.5
         with:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          head: ${{ github.ref }}
-          base: stage
-          title: ${{ github.event.head_commit.message }}
+          github_token: ${{ secrets.ACCESS_TOKEN }}
+          source_branch: ${{ steps.release.outputs.branch }}
+          target_branch: stage
+          title: My pull request
+          body: '**Automated pull request**'
+          label: enhancement
+          milestone: My milestone
+          draft: true
+          old_string: '<!-- Add your description here -->'
+          new_string: '** Automatic pull request**'
+          get_diff: true
+          allow_no_diff: false
