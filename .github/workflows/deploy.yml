@@ -36,27 +36,12 @@ jobs:
           get_diff: true
           allow_no_diff: true
 
-  main-pr-branch:
-    needs: stage-pr-branch
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Get Current Release Branch
-        id: release
-        run: echo "::set-output name=branch::$(date +'release/v%Y%m%d')"
-
-      - name: Echo Release Branch
-        run: echo ${{ steps.release.outputs.branch }}
-
-      - name: Git checkout
-        uses: actions/checkout@v3
-
-      - name: Create PR to main
+      - name: Create PR to master
         uses: devops-infra/action-pull-request@v0.5.5
         with:
           github_token: ${{ secrets.ACCESS_TOKEN }}
           source_branch: ${{ steps.release.outputs.branch }}
-          target_branch: main
+          target_branch: master
           title: ${{ steps.release.outputs.branch }} pull request
           body: '**Automated pull request**'
           label: frontend
