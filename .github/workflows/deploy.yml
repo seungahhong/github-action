@@ -36,7 +36,7 @@ jobs:
           get_diff: true
           allow_no_diff: false
 
-      - name: Create PR to stage
+      - name: Create PR to main
         uses: devops-infra/action-pull-request@v0.5.5
         with:
           github_token: ${{ secrets.ACCESS_TOKEN }}
