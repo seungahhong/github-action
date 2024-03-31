@@ -45,7 +45,7 @@ jobs:
         run: echo "::set-output name=branch::$(date +'release/v%Y%m%d')"
 
       # 릴리즈 브랜치명 출력
-      - name: Echo Release Branch
+      - name: Echo Release Branch1
         run: echo ${{ steps.release.outputs.branch }}
 
       # 해당 저장소의 코드를 가져옵니다.(PR과 상관없는 브랜치로 checkout, 안그럴경우 액션 오류)
