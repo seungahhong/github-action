@@ -86,16 +86,12 @@ jobs:
           get_diff: true
           allow_no_diff: true
 
-  slack-notify:
-    needs: stage-merge-master-pr-branch
-    runs-on: ubuntu-latest
-
-    steps:
+      # slack notify
       - name: action-slack
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
-          author_name: seungah.hong
+          author_name: merge,pr notify
           fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
           if_mention: failure,cancelled
         env:
