@@ -43,7 +43,7 @@ jobs:
         with:
           branch: stage
 
-  stage-pr-branch:
+  stage-merge-master-pr-branch:
     needs: create-branch
     runs-on: ubuntu-latest
 
@@ -54,7 +54,7 @@ jobs:
         run: echo "::set-output name=branch::$(date +'release/v%Y%m%d')"
 
       # 릴리즈 브랜치명 출력
-      - name: Echo Release Branch1
+      - name: Echo Release Branch
         run: echo ${{ steps.release.outputs.branch }}
 
       # 해당 저장소의 코드를 가져옵니다.(PR과 상관없는 브랜치로 checkout, 안 그럴경우 액션 오류)
@@ -63,14 +63,14 @@ jobs:
         with:
           ref: master
 
-      # stage 브랜치 머지
-      - name: Merge release branch -> stage
-        uses: devmasx/merge-branch@master
-        with:
-          type: now
-          from_branch: ${{ steps.release.outputs.branch }}
-          target_branch: stage
-          github_token: ${{ secrets.ACCESS_TOKEN }}
+      # # stage 브랜치 머지
+      # - name: Merge release branch -> stage
+      #   uses: devmasx/merge-branch@master
+      #   with:
+      #     type: now
+      #     from_branch: ${{ steps.release.outputs.branch }}
+      #     target_branch: stage
+      #     github_token: ${{ secrets.ACCESS_TOKEN }}
 
       # main 브랜치 PR
       - name: Create PR to main
