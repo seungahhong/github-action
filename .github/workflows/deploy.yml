@@ -1,8 +1,8 @@
 name: Delete Branch & Create Branch
 
 on:
-  schedule:
-    - cron: '55 22 * * *' # AM 07:55, South Korea!
+  # schedule:
+  #   - cron: '55 22 * * *' # AM 07:55, South Korea!
   workflow_dispatch:
     # 값도 받을 수 있습니다. region, env 말고 원하시는 값들을 받을 수도 있겠죠?
     inputs:
@@ -68,7 +68,7 @@ jobs:
         uses: devmasx/merge-branch@master
         with:
           type: now
-          from_branch: steps.release.outputs.branch
+          from_branch: ${{ steps.release.outputs.branch }}
           target_branch: stage
           github_token: ${{ secrets.ACCESS_TOKEN }}
 
