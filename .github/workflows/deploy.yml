@@ -63,14 +63,14 @@ jobs:
         with:
           ref: master
 
-      # # stage 브랜치 머지
-      # - name: Merge release branch -> stage
-      #   uses: devmasx/merge-branch@master
-      #   with:
-      #     type: now
-      #     from_branch: ${{ steps.release.outputs.branch }}
-      #     target_branch: stage
-      #     github_token: ${{ secrets.ACCESS_TOKEN }}
+      # stage 브랜치 머지
+      - name: Merge release branch -> stage
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          from_branch: ${{ steps.release.outputs.branch }}
+          target_branch: stage
+          github_token: ${{ secrets.ACCESS_TOKEN }}
 
       # main 브랜치 PR
       - name: Create PR to main
