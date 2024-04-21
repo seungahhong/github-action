@@ -85,3 +85,19 @@ jobs:
           new_string: '** Automatic pull request**'
           get_diff: true
           allow_no_diff: true
+
+  slack-notify:
+    needs: stage-merge-master-pr-branch
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: action-slack
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          author_name: seungah.hong
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
+          if_mention: failure,cancelled
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: always() # Pick up events even if the job fails or is canceled.
